@@ -96,7 +96,7 @@ export default function VerificationModal({ isOpen, onClose, onComplete }) {
                   {photoUploaded ? (
                     <div className="relative">
                       <img
-                        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face"
+                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face"
                         alt="Profile photo"
                         className="w-full h-64 object-cover rounded-2xl"
                       />
@@ -200,7 +200,7 @@ export default function VerificationModal({ isOpen, onClose, onComplete }) {
                             <div className="flex items-center gap-3 mb-3">
                               <div className="w-16 h-20 bg-gray-200 rounded-lg overflow-hidden">
                                 <img
-                                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=130&fit=crop&crop=face"
+                                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=130&fit=crop&crop=face"
                                   alt="ID Photo"
                                   className="w-full h-full object-cover"
                                 />
@@ -327,7 +327,7 @@ export default function VerificationModal({ isOpen, onClose, onComplete }) {
                       <div className="bg-green-50 border border-green-200 rounded-xl p-4">
                         <div className="flex items-center">
                           <img
-                            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face"
+                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face"
                             alt="Profile"
                             className="w-16 h-16 rounded-xl object-cover mr-4"
                           />
