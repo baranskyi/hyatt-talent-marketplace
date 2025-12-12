@@ -73,6 +73,23 @@ export default function WorkerProfile() {
                 <StarRating rating={worker.rating} size={20} />
                 <span className="text-gray-300">({worker.reviewCount} reviews)</span>
               </div>
+
+              {/* Verification Button */}
+              {!isVerified && (
+                <button
+                  onClick={() => setShowVerification(true)}
+                  className="mt-4 inline-flex items-center bg-hyatt-gold text-hyatt-blue px-5 py-2 rounded-lg font-semibold hover:bg-hyatt-gold-light transition-all shadow-md"
+                >
+                  <ShieldAlert size={18} className="mr-2" />
+                  Verify Identity
+                </button>
+              )}
+              {isVerified && (
+                <div className="mt-4 inline-flex items-center bg-green-500/20 text-green-300 px-4 py-2 rounded-lg font-medium">
+                  <ShieldCheck size={18} className="mr-2" />
+                  Verified Account
+                </div>
+              )}
             </div>
           </div>
         </div>
