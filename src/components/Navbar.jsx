@@ -22,9 +22,9 @@ export default function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
             <img
-              src="https://logos-world.net/wp-content/uploads/2021/08/Hyatt-Logo.png"
+              src="/hyatt-hotels.png"
               alt="Hyatt"
-              className="h-8 w-auto brightness-0 invert"
+              className="h-10 w-auto"
             />
             <div className="hidden sm:flex items-center">
               <span className="text-white/50 mx-2">|</span>

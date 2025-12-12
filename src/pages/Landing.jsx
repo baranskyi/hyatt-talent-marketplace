@@ -43,6 +43,15 @@ export default function Landing() {
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
           <div className="text-center">
+            {/* Hyatt Logo */}
+            <div className="mb-8">
+              <img
+                src="/hyatt-hotels.png"
+                alt="Hyatt Hotels"
+                className="h-20 md:h-28 w-auto mx-auto"
+              />
+            </div>
+
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
               Find Flexible Work at{' '}
               <span className="text-hyatt-gold">Hyatt Hotels</span>
@@ -266,9 +275,9 @@ export default function Landing() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-3 mb-4 md:mb-0">
               <img
-                src="https://logos-world.net/wp-content/uploads/2021/08/Hyatt-Logo.png"
+                src="/hyatt-hotels.png"
                 alt="Hyatt"
-                className="h-8 w-auto brightness-0 invert opacity-80"
+                className="h-10 w-auto brightness-0 invert opacity-90"
               />
               <span className="text-white/50 mx-1">|</span>
               <span className="text-white font-semibold">Talent Marketplace</span>
