@@ -9,8 +9,8 @@ export default {
       colors: {
         hyatt: {
           blue: '#1C3144',
-          gold: '#161f6e',
-          'gold-light': '#1e2a8a',
+          gold: '#C9A227',
+          'gold-light': '#D4AF37',
         }
       },
       fontFamily: {
