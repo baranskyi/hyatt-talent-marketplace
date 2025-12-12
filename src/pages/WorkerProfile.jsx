@@ -1,12 +1,49 @@
-import { MapPin, Mail, Phone, Calendar, Star, Shield, Award, TrendingUp } from 'lucide-react';
+import { useState } from 'react';
+import { MapPin, Mail, Phone, Calendar, Star, Shield, Award, TrendingUp, ShieldCheck, ShieldAlert, Camera } from 'lucide-react';
 import StarRating from '../components/StarRating';
+import VerificationModal from '../components/VerificationModal';
+import toast from 'react-hot-toast';
 import { currentWorker, workerReviews } from '../data/mockData';
 
 export default function WorkerProfile() {
   const worker = currentWorker;
+  const [showVerification, setShowVerification] = useState(false);
+  const [isVerified, setIsVerified] = useState(worker.verified);
+
+  const handleVerificationComplete = () => {
+    setIsVerified(true);
+    toast.success(
+      <div className="flex flex-col">
+        <div className="flex items-center font-semibold">
+          <ShieldCheck className="text-green-500 mr-2" size={20} />
+          Identity Verified!
+        </div>
+        <p className="text-sm text-gray-500 mt-1">
+          Your account is now fully verified.
+        </p>
+      </div>,
+      {
+        duration: 5000,
+        style: {
+          background: '#fff',
+          color: '#1C3144',
+          padding: '16px',
+          borderRadius: '12px',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+        },
+      }
+    );
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Verification Modal */}
+      <VerificationModal
+        isOpen={showVerification}
+        onClose={() => setShowVerification(false)}
+        onComplete={handleVerificationComplete}
+      />
+
       {/* Header */}
       <div className="bg-hyatt-blue py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -18,7 +55,7 @@ export default function WorkerProfile() {
                 alt={worker.name}
                 className="w-32 h-32 rounded-2xl object-cover border-4 border-hyatt-gold shadow-lg"
               />
-              {worker.verified && (
+              {isVerified && (
                 <div className="absolute -bottom-2 -right-2 bg-green-500 text-white p-2 rounded-full shadow-md">
                   <Shield size={16} />
                 </div>
@@ -158,6 +195,49 @@ export default function WorkerProfile() {
               </div>
             </div>
 
+            {/* Verification Status */}
+            <div className="bg-white rounded-2xl shadow-md p-6">
+              <h2 className="text-xl font-bold text-hyatt-blue mb-4">Verification Status</h2>
+              {isVerified ? (
+                <div className="space-y-4">
+                  <div className="bg-green-50 border border-green-200 rounded-xl p-4">
+                    <div className="flex items-center text-green-700 mb-2">
+                      <ShieldCheck size={24} className="mr-2" />
+                      <span className="font-bold">Fully Verified</span>
+                    </div>
+                    <p className="text-sm text-green-600">Identity confirmed via KYC process</p>
+                  </div>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex items-center text-gray-600">
+                      <Camera size={16} className="mr-2 text-green-500" />
+                      Photo verified
+                    </div>
+                    <div className="flex items-center text-gray-600">
+                      <Shield size={16} className="mr-2 text-green-500" />
+                      ID document scanned
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4">
+                    <div className="flex items-center text-yellow-700 mb-2">
+                      <ShieldAlert size={24} className="mr-2" />
+                      <span className="font-bold">Not Verified</span>
+                    </div>
+                    <p className="text-sm text-yellow-600">Complete KYC to unlock all features</p>
+                  </div>
+                  <button
+                    onClick={() => setShowVerification(true)}
+                    className="w-full bg-hyatt-gold text-hyatt-blue py-3 rounded-xl font-semibold hover:bg-hyatt-gold-light transition-all flex items-center justify-center"
+                  >
+                    <Shield size={18} className="mr-2" />
+                    Start Verification
+                  </button>
+                </div>
+              )}
+            </div>
+
             {/* Badges */}
             <div className="bg-white rounded-2xl shadow-md p-6">
               <h2 className="text-xl font-bold text-hyatt-blue mb-4">Achievements</h2>
@@ -166,10 +246,12 @@ export default function WorkerProfile() {
                   <Award className="mr-3" size={20} />
                   <span className="font-medium">Top Performer</span>
                 </div>
-                <div className="flex items-center bg-green-50 text-green-700 px-4 py-3 rounded-xl">
-                  <Shield className="mr-3" size={20} />
-                  <span className="font-medium">Verified Identity</span>
-                </div>
+                {isVerified && (
+                  <div className="flex items-center bg-green-50 text-green-700 px-4 py-3 rounded-xl">
+                    <Shield className="mr-3" size={20} />
+                    <span className="font-medium">Verified Identity</span>
+                  </div>
+                )}
                 <div className="flex items-center bg-blue-50 text-blue-700 px-4 py-3 rounded-xl">
                   <Star className="mr-3" size={20} />
                   <span className="font-medium">5-Star Service</span>

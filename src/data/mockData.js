@@ -182,7 +182,7 @@ export const currentWorker = {
   avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80",
   rating: 4.8,
   reviewCount: 23,
-  verified: true,
+  verified: false,  // Set to false for demo - shows verification flow
   memberSince: "March 2024",
   skills: ["Waiter", "Front Desk", "Events", "Bartender"],
   availability: "20 hrs/week",
