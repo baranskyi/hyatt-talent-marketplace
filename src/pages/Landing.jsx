@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Briefcase, Clock, DollarSign, Star, Building2, Users, ArrowRight, UserPlus, Search, CheckCircle, Wallet, ChevronRight } from 'lucide-react';
+import { Briefcase, Clock, DollarSign, Star, Building2, Users, ArrowRight, UserPlus, Search, CheckCircle, Wallet, ChevronRight, LayoutDashboard } from 'lucide-react';
 
 export default function Landing() {
   const features = [
@@ -39,6 +39,17 @@ export default function Landing() {
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-hyatt-blue/70 via-hyatt-blue/60 to-hyatt-blue/90"></div>
+        </div>
+
+        {/* Admin Button - Top Right */}
+        <div className="absolute top-4 right-4 z-10">
+          <Link
+            to="/admin"
+            className="inline-flex items-center bg-white/10 backdrop-blur-sm text-white px-4 py-2 rounded-lg font-medium hover:bg-white/20 transition-all border border-white/20"
+          >
+            <LayoutDashboard size={18} className="mr-2" />
+            Admin
+          </Link>
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
