@@ -41,9 +41,9 @@ export default function ContractModal({ isOpen, onClose, onSign, shift }) {
 
       {/* Modal */}
       <div className="relative min-h-screen flex items-center justify-center p-4">
-        <div className="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden">
+        <div className="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col">
           {/* Header */}
-          <div className="bg-hyatt-blue text-white p-6">
+          <div className="bg-hyatt-blue text-white p-6 flex-shrink-0">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <FileText className="mr-3" size={28} />
@@ -80,7 +80,7 @@ export default function ContractModal({ isOpen, onClose, onSign, shift }) {
           </div>
 
           {/* Content */}
-          <div className="p-6 overflow-y-auto max-h-[60vh]">
+          <div className="p-6 overflow-y-auto flex-1 min-h-0">
             {currentStep === 1 && (
               <div className="space-y-6">
                 {/* Contract Header */}
