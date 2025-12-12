@@ -1,11 +1,16 @@
-import { useParams, Link } from 'react-router-dom';
-import { MapPin, Clock, Calendar, DollarSign, Users, CheckCircle, ArrowLeft } from 'lucide-react';
+import { useState } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { MapPin, Clock, Calendar, DollarSign, Users, CheckCircle, ArrowLeft, FileText } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { shifts } from '../data/mockData';
+import ContractModal from '../components/ContractModal';
 
 export default function ShiftDetails() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const shift = shifts.find((s) => s.id === parseInt(id));
+  const [showContract, setShowContract] = useState(false);
+  const [isApplied, setIsApplied] = useState(false);
 
   if (!shift) {
     return (
@@ -20,14 +25,26 @@ export default function ShiftDetails() {
     );
   }
 
-  const handleApply = () => {
+  const handleApplyClick = () => {
+    setShowContract(true);
+  };
+
+  const handleContractSign = () => {
+    setShowContract(false);
+    setIsApplied(true);
+
     toast.success(
-      <div className="flex items-center">
-        <CheckCircle className="text-green-500 mr-2" size={20} />
-        <span>Application submitted successfully!</span>
+      <div className="flex flex-col">
+        <div className="flex items-center font-semibold">
+          <CheckCircle className="text-green-500 mr-2" size={20} />
+          Application Submitted!
+        </div>
+        <p className="text-sm text-gray-500 mt-1">
+          Contract signed. You'll hear back within 24-48 hours.
+        </p>
       </div>,
       {
-        duration: 3000,
+        duration: 5000,
         style: {
           background: '#fff',
           color: '#1C3144',
@@ -37,10 +54,23 @@ export default function ShiftDetails() {
         },
       }
     );
+
+    // Redirect to My Shifts after a delay
+    setTimeout(() => {
+      navigate('/my-shifts');
+    }, 2000);
   };
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Contract Modal */}
+      <ContractModal
+        isOpen={showContract}
+        onClose={() => setShowContract(false)}
+        onSign={handleContractSign}
+        shift={shift}
+      />
+
       {/* Hero Image */}
       <div className="relative h-64 md:h-80">
         <img
@@ -143,6 +173,20 @@ export default function ShiftDetails() {
                 </ul>
               </div>
             </div>
+
+            {/* Contract Info */}
+            <div className="bg-blue-50 border border-blue-200 rounded-2xl p-6">
+              <div className="flex items-start">
+                <FileText className="text-blue-500 mr-3 mt-1 flex-shrink-0" size={24} />
+                <div>
+                  <h3 className="font-semibold text-blue-900 mb-2">Contract Required</h3>
+                  <p className="text-blue-700 text-sm">
+                    Before starting work, you'll need to review and sign a digital employment contract
+                    covering GDPR, payment terms, dress code, and Hyatt brand standards.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Sidebar */}
@@ -167,16 +211,29 @@ export default function ShiftDetails() {
                 ></div>
               </div>
 
-              <button
-                onClick={handleApply}
-                className="w-full bg-hyatt-gold text-hyatt-blue py-4 rounded-xl font-semibold text-lg hover:bg-hyatt-gold-light transition-all shadow-md hover:shadow-lg"
-              >
-                Apply Now
-              </button>
+              {isApplied ? (
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <CheckCircle className="text-green-500" size={32} />
+                  </div>
+                  <h3 className="font-semibold text-green-700 mb-1">Application Submitted!</h3>
+                  <p className="text-sm text-gray-500">You'll hear back within 24-48 hours</p>
+                </div>
+              ) : (
+                <>
+                  <button
+                    onClick={handleApplyClick}
+                    className="w-full bg-hyatt-gold text-hyatt-blue py-4 rounded-xl font-semibold text-lg hover:bg-hyatt-gold-light transition-all shadow-md hover:shadow-lg flex items-center justify-center"
+                  >
+                    <FileText size={20} className="mr-2" />
+                    Apply Now
+                  </button>
 
-              <p className="text-center text-gray-400 text-sm mt-4">
-                Usually responds within 24 hours
-              </p>
+                  <p className="text-center text-gray-400 text-sm mt-4">
+                    You'll review & sign a contract before submitting
+                  </p>
+                </>
+              )}
             </div>
 
             {/* Hotel Info Card */}
